@@ -5,9 +5,9 @@ const products = [
   {id: 4, title: 'Gamepad', price: 4500},
 ];
 
-const renderProduct = (title, price, img = '') => {
-return `<img src="${img}" alt="">
-<div class="product-item">
+const renderProduct = (title, price, img = 'https://placeimg.com/200/200') => {
+return `<div class="product-item">
+<img src="${img}" alt="${title}">
 <h3>${title}</h3>
 <p>${price}</p>
 <button class = "by-btn">Добавить в корзину.</button>
@@ -16,28 +16,6 @@ return `<img src="${img}" alt="">
 
 const renderProducts = (list) => {
   const productList = list.map((item) => renderProduct(item.title, item.price));
-  document.querySelector('.products').innerHTML = productList;
+  document.querySelector('.products').innerHTML = productList.join('');
 };
 renderProducts(products);
-
-
-
-
-
-
-// const renderProduct = (title, price, img = '') => {
-//   return `<div class="product-item">
-//             <img src="${img}" alt="">
-//             <h3>${title}</h3>
-//             <p>${price}</p>
-//             <button class="by-btn">Добавить в корзину</button>
-//           </div>`;
-// };
-
-// const renderProducts = (list) => {
-//   const productList = list.map(item => renderProduct(item.title, item.price));
-//   console.log(productList);
-//   document.querySelector('.products').innerHTML = productList;
-// };
-
-// renderProducts(products);
