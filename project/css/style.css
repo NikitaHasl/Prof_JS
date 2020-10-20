@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    
+}
+.products{
+    display: flex;
+    justify-content: start;
+}
+.product-item{
+    margin: 10px;
+    outline: 1px solid #eeaaaa;
+}
+.by-btn{
+    padding: 10px;
+    color: burlywood;
+    cursor: pointer;
+    background-color: chocolate;
+}
+.btn-cart{
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+.menu-ul{
+    display: flex;
+    justify-content: left;
+}
+.menu-list{
+    list-style-type: none;
+}
+.menu-link{
+    display: block;
+    color: #555555;
+    margin: 0px 5px;
+    padding: 10px;
+    outline-style: solid;
+}
+.menu-link:hover{
+    color:#777777;
+    text-decoration: underline;
+}
