@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 1</title>
+</head>
+<body>
+<div id="green">Click Me</div>
+<script>
+    /**
+     * variables
+     */
+    // ES5
+    // var nsme = 'Nik';
+    // var age = 34;
+
+    // name = 'John';
+    // console.log(name);
+    
+    // ES6
+    // const name = 'Nik';
+    // let age = 33;
+    // name = 'john';
+    
+    // Functions
+    // ES5
+    // function passTest(result){
+    //     if(result){
+    //         var firstName = 'Bob';
+    //         var yearOfBirth = 1990;
+    //     }
+    //     console.log(firstName + ' рожденный в ' + yearOfBirth + ' сдал тест');
+    // }
+    // passTest(false);
+
+    // ES6
+        // function passTest(result){
+        //     let firstName ='';
+        //     let yearOfBirth = 0;
+        //     if (result){
+        //     firstName = 'Nik';
+        //     yearOfBirth = 1997;
+        //     }
+        //     console.log(firstName + ' рожденный в ' + yearOfBirth + ' сдал тест');
+
+        // }
+        // passTest(true);
+    
+
+    /**
+     * Cycles
+     */
+    // ES5
+    // var i = 23;
+    // for(var i =0; i<5;i++){
+    //     console.log(i);
+    // }
+    // console.log(i);
+
+    // ES6
+    // let i = 23;
+    // for (let i =0; i<5;i++){
+    //     console.log(i);
+    // }
+    // console.log(i);
+    // function a(){
+    //     'use strict'
+    //     var b = 5;
+    //     let c = 10;
+    //     d =20;
+    // }
+    // a();
+    // console.log(d);
+
+    /**
+     * Template literals
+     */
+    // ES5
+
+    // var firstName = 'john';
+    // var lastName = 'snith';
+    // var yearOfBirth = 1990;
+
+    // function calcAge(year){
+    //     return 2020 - year;
+    // }
+
+    // console.log(firstName +' ' + lastName + ' рожден в ' + yearOfBirth + '. Ему сейчас '+ calcAge(yearOfBirth));
+
+
+    // ES6
+    // const firstName = 'john';
+    // const lastName = 'snith';
+    // const yearOfBirth = 1990;
+
+    // function calcAge(year){
+    //     return 2020 - year;
+    // };
+
+    // console.log(`${firstName} ${lastName} рожден в ${yearOfBirth}. Ему ${caclAge(yearOfBirth)} лет.`);
+    
+    // const str = `${firstName} ${lastName}`;
+    // console.log(str);
+    // console.log(str.startsWith('s'));
+    // console.log(str.endsWith('h'));
+    // console.log(str.includes('ohn'));
+    // console.log(`${str} `.repeat(10));
+
+    /**
+     * Arrow function
+     */
+    // ES6
+
+    // const calcAge = () => {
+    //     return 6;
+    // };
+    // console.log(calcAge());
+    
+    // const calcAge = (x) => {
+    //     return 6 + x;
+    // };
+    // console.log(calcAge(10));
+
+    // const calcAge = (x) => 6 + x;
+    // console.log(calcAge(10));
+
+    // const calcAge = (x, y = 0) => {
+    //     let b = y;
+    //     return 6 - x + b;
+    // };
+    // console.log(calcAge(4));
+
+    // ES5
+    // var box = {
+    //     color: 'green',
+    //     position: 1,
+    //     clickMe: function(){
+    //         var self = this;
+    //         console.log(self);
+    //         document.getElementById('green').addEventListener('click', function(){
+    //             console.log('This is a box number ' + self.position + ' and color ' + self.color);
+    //             console.log(this);
+    //         });
+    //     },
+    // };
+    // box.clickMe();
+    
+
+    // ES6
+
+    // const box = {
+    //     color: 'green',
+    //     position: 1,
+    //     clickMe: function(){
+    //         document.getElementById('green').addEventListener('click', () => {
+    //             console.log(`This is a box number ${this.position} and color ${this.color}`);
+    //         });
+    //     },
+    // };
+    // box.clickMe();
+    
+
+    /**
+     * Деструктуризация
+     */
+    // ES5
+
+    // var arr = ['John', 25];
+    // var name = arr[0];
+    // var age = arr[1];
+
+    // console.log(name,age);
+
+    
+    // ES6
+    // const arr = ['John', 25, true];
+    // let [name,, isAdmin] = arr;
+    // console.log(name, isAdmin);
+
+    // const obj = {
+    //     firstName: 'John',
+    //     lastName: 'Doe',
+    //     colors:['white', 'black'],
+    // };
+
+    // let {firstName: name, lastName: familia, colors: [a, b]} = obj;
+    // console.log(name, familia, a,b);
+    
+
+    // function foo({firstName}) {
+    //     console.log(firstName);
+    // }
+
+    // foo(obj);
+</script>
+</body>
+</html>
