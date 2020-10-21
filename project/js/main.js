@@ -8,6 +8,14 @@ class ProductList {
 
     this._fetchGoods();
     this.#render();
+    this._sumGoodsList();
+  }
+  _sumGoodsList(){
+    let sum = 0;
+    for(let product of this._allProducts){
+      sum += product.price;
+    }
+    console.log(sum);
   }
 
   _fetchGoods() {
@@ -51,5 +59,25 @@ class ProductItem {
             </div>`;
   }
 }
+
+class CartList {
+  constructor(){
+
+  }
+  _sumAllCartItem(){//Сумма всех товаров в корзине
+
+  }
+  _renderCart(){
+
+  }
+}
+
+class CartItem {
+  constructor(){
+
+  }
+
+}
+
 
 const list = new ProductList();
