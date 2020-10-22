@@ -1,3 +1,22 @@
+const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+
+// Переделать в ДЗ не использовать fetch а Promise
+let getRequest = (url, cb) => {
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) {
+      if (xhr.status !== 200) {
+        console.log('Error');
+      } else {
+        cb(xhr.responseText);
+      }
+    }
+  };
+  xhr.send();
+};
+
+// –--------------------------------
 class ProductList {
   #goods;
 
@@ -6,8 +25,8 @@ class ProductList {
     this.#goods = [];
     this._allProducts = [];
 
-    this._fetchGoods();
-    this.#render();
+    this.#getProducts();
+    
     this._sumGoodsList();
   }
   _sumGoodsList(){
@@ -17,15 +36,18 @@ class ProductList {
     }
     console.log(sum);
   }
-
-  _fetchGoods() {
-    this.#goods = [
-      {id: 1, title: 'Notebook', price: 20000},
-      {id: 2, title: 'Mouse', price: 1500},
-      {id: 3, title: 'Keyboard', price: 5000},
-      {id: 4, title: 'Gamepad', price: 4500},
-    ];
+  #getProducts(){
+    return fetch(`${API}/catalogData.json`).then((response) => response.json()).then((data) => {
+      this.#goods = [...data];
+      this.#render();
+    }).catch((error) => console.log(error))
   }
+  // _fetchGoods() {
+  //   getRequest(`${API}/catalogData.json`, (data) => {
+  //     this.#goods = JSON.parse(data);
+  //     this.#render();
+  //   });
+  // }
 
   #render() {
     const block = document.querySelector(this.container);
