@@ -22,8 +22,70 @@
 </header>
 <main>
     <div class="products"></div>
+    <div class='text'>Lorem ipsu'm 'dolor sit amet consectetur' adipisicing elit. Explicabo fugiat cumque dignissimos cum sit facilis repudiandae, molestiae tempora iure, quam nemo! Quis pariatur tenetur laudantium temporibus qui error inventore iste vitae. Nam, minus voluptatum quos labore, ad totam aspernatur consectetur molestiae dicta praesentium ipsam laborum eaque debitis quisquam inventore natus delectus expedita libero veniam magni recusandae repellat dolor sapiente explicabo! Iusto consectetur obcaecati libero repellat blanditiis in voluptates architecto, laborum, voluptas eius rem atque nobis vel quod dolore nostrum, distinctio nam vitae? 'Dolorum quidem assumenda', nisi natus quisquam repudiandae reprehenderit non laboriosam odio debitis dolore voluptas, optio aliquid consectetur maxime ipsum quos. Eaque tempora eligendi magni quisquam velit soluta vitae nisi possimus, reprehenderit ea dolore nobis fugiat facere asperiores vel, error neque? Beatae, ullam possimus 'ipsam magnam nam amet' porro ipsa facilis, delectus veritatis quis nobis suscipit. Molestias nihil, sequi ullam obcaecati accusamus incidunt sint itaque nisi. Explicabo aliquid eos laborum vitae iste id iusto non? Non eligendi modi aliquid labore ducimus quasi tempora, natus vitae aspernatur reprehenderit omnis sit. Quos dicta officiis deserunt veritatis quis laborum aut tempora hic at non exercitationem est magni rem perferendis quae adipisci doloremque nemo vero unde, optio atque velit ratione. 'Magnam repellendus', libero ab sapiente natus hic 'error consectetur suscipit cum', nisi veritatis id quos sed, laudantium tenetur praesentiu'm minus saepe deserunt 'quaerat iusto voluptates nihil vitae nobis?' Dicta odio nesciunt non maiores debitis doloremque possimus quis totam excepturi perferendis, harum, minima, nulla tempora. Incidunt at delenit'i non excepturi sed velit eius, eos laudantium dolores 'nemo consectetur praesentium nihil' numquam ad fuga blanditiis accusamus illum quidem libero aperiam perferendis placeat. Pariatu'r optio 'deleniti autem' expedita, provident sint aliquam quidem dicta! Aliquid optio totam incidunt. Distinctio voluptatum iste aliquam tempora assumenda vitae, maxime eveniet dicta, quas praesentium a facilis quaerat modi autem tenetur dignissimos.</div>
+    <form class='form-validate' action="#">
+        <label for="name">Имя:</label>
+        <input id='name' type="text">
+        <p id='name-error' class="error invisible">Имя должно содержать только буквы.</p>
+        <label for="tel">Телнфон:</label>
+        <input id='tel' type="text">
+        <p id='tel-error' class="error invisible">Телефон должен иметь вид +7(000)000-0000.</p>
+        <label for="email">Почта:</label>
+        <input id='email' type="text">
+        <p id='email-error' class="error invisible">E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru.</p>
+        <label for="text">Текст:</label>
+        <input id='text' type="text">
+        <p id='text-error' class="error invisible">Текст не должен быть пустым.</p>
+        <input id='button' type="submit">
+    </form>
 </main>
 <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
+<script>
+    let text = document.querySelector('.text');
+    // text.innerText = text.textContent.replace(/'/g,'"'); // Меняет все одинарные кавычки
+    //text.innerText = text.textContent.replace(/\B'([\w\s]*)'\B/g,'"$1"'); // Мой изначальный вариант, не убирает ' в словах типа aren't
+    text.innerText = text.textContent.replace(/\B'|'\B/g,'"'); // Более элегантный вариант, нашел немного погуглив.
+
+    //Form validate
+    document.querySelector('.form-validate').addEventListener('submit', (event)=>{
+        event.preventDefault();
+        let nameValid = new Validate(/^[\D]+$/ig, 'name');
+        let telValid = new Validate(/\+7\(\d{3}\)\d{3}-\d{4}/ig, 'tel');
+        let emailValid = new Validate(/^my[ .-]?mail@mail.ru$/ig, 'email');
+        let textValid = new Validate(/\w/ig,'text');
+    })
+    class Validate{
+        constructor(regExp, id){
+            this.regExp = regExp;
+            this.input = document.getElementById(`${id}`);
+            this.error = document.getElementById(`${id}-error`);
+
+            this.isNotEmpty();
+        }
+        validate(){
+            return this.regExp.test(this.input.value);
+        }
+        result(){
+            if(!this.validate()){
+                this.input.style.border = '2px solid red';
+                this.error.classList.remove('invisible');
+            }else{
+                this.input.style.border = '2px solid green';
+                this.error.classList.add('invisible');
+            }
+        }
+        isNotEmpty(){
+            if(this.input.value !== ''){
+                this.result();
+            } else {
+                this.input.style.border = '2px solid red';
+                this.error.classList.remove('invisible');
+            }
+        }
+    }
+    
+
+</script>
 </body>
 </html>
