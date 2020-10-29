@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 5</title>
+    <style>
+        .block {
+            width: 200px;
+            height: 200px;
+            background-color: #c0c0c0;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>{{title}}</h1>
+    <h2>{{sayHello()}}</h2>
+    <!-- <a v-bind:href="link">Google</a> -->
+    <a :href="link">Google</a>
+    <div v-html='comElement'></div>
+    <!-- <input type="text" v-model='name'> -->
+    <input type="text" v-model.lazy='name'>
+    <p>{{name}}</p>
+    <input type="number" v-model.number='num'>
+    <p>{{num}}</p>
+    <!-- Events -->
+    <!-- <button v-on:click='increase()'>Increase</button> -->
+    <button @click='increase(3, $event)'>Increase</button>
+    <p>{{counter}}</p>
+    <p>{{counter > 10 ? 'Greater 10' : 'Less 10'}}</p>
+    <p @mousemove='setCoordinates($event)'>Position {{x}}/{{y}}
+        <span @mousemove.stop>Dont catch this span</span>
+    </p>
+    <!-- Вычисляемые значения -->
+    <div>
+        <button @click='counter++'>Increase</button>
+        <button @click='counter--'>Decrease</button>
+        <button @click='secondCounter++'>Increase second counter</button>
+        <p>Counter: {{counter}} | {{secondCounter}}</p>
+        <p>Result: {{result()}} | {{output}}</p>
+    </div>
+    <div class="block" :class='{red: isRed, blue: !isRed}' @click='isRed = !isRed'>
+        
+    </div>
+    <!-- Стилизация -->
+    <input type="text" v-model='width'>
+    <input type="text" v-model='color'>
+    <div class="block" :style='myStyle'></div>
+    <h2 v-if='show'>im visible</h2>
+    <h2 v-else>NOT, IM VISIBLE</h2>
+    <button @click='show = !show'>Change</button>
+    <div class="products">
+        <div class="product" v-for='product of products' :key='product.title'>
+            <img :src="product.img" alt="">
+            <div>
+                <p>{{product.title}}</p>
+                <p>{{product.quantity}}</p>
+                <p>{{product.quantity * product.price}}</p>
+            </div>
+        </div>
+    </div>
+    <button @click='addProduct()'>Add product</button>
+    <button @click='products[0].quantity++'>Change quantity</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            title: 'Hello world',
+            link: 'https://google.com',
+            comElement: `<span>im new element <a href='https://google.com' id='link'>google</a></span>`,
+            name:'',
+            num: 0,
+            counter: 0,
+            secondCounter: 0,
+            x: 0,
+            y: 0,
+            isRed: false,
+            width:100,
+            color: 'black',
+            show: true,
+            products: [
+                {img: 'https://placehold.it/200x150', title: 'Notebook', price: 1000, quantity: 1},
+                {img: 'https://placehold.it/200x150', title: 'Mouse', price: 100, quantity: 1},
+                {img: 'https://placehold.it/200x150', title: 'Chair', price: 300, quantity: 1},
+            ],
+
+            
+        },
+        methods: {
+            sayHello(){
+                this.title = 'Changed';
+                return this.title;
+            },
+            increase(step, event){
+                console.log(event);
+                this.counter += step;
+            },
+            setCoordinates(event){
+                this.x = event.clientX;
+                this.y = event.clientY;
+                // console.log('setCoordinate');
+            },
+            result(){
+                console.log('method');
+                return this.counter > 5 ? '<5':'>5';
+            },
+            addProduct(){
+                this.products.push({img: 'https://placehold.it/200x150', title: 'Tit', price: 500, quantity: 1})
+            },
+        },
+        computed: {
+            output(){
+                console.log('computed');
+                return this.counter > 5 ? '<5':'>5';
+            },
+            myStyle(){
+                return{
+                    backgroundColor: this.color,
+                    width: `${this.width}px`,
+                    height: `${this.width}px`,
+                }
+            }
+        },
+    });
+</script>
+</body>
+</html>
