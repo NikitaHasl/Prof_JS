@@ -16,6 +16,14 @@ button:focus{
     text-transform: uppercase;
     font-weight: bold;
 }
+.error-text{
+    color: red;
+    text-align: center;
+    font-style: italic;
+}
+.div-btn-cart{
+    display: inline-block;
+}
 .btn-cart{
     background-color: #fafafa;
     padding: 10px 20px;
@@ -24,6 +32,7 @@ button:focus{
     border-radius: 5px;
     transition: all ease-in-out .4s;
     cursor: pointer;
+    
 }
 .btn-cart:hover{
     background-color: transparent;
