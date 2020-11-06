@@ -3,23 +3,27 @@ Vue.component('products', {
         return {
             catalogUrl: '/catalogData.json',
             products: [],
+            filtered: [],
             imgCatalog: 'https://placehold.it/200x150',
 
         }
     },
     methods: {
-
+        FilterGoods(value) {
+            const regexp = new RegExp(value, 'i');
+            this.filtered = this.products.filter(product => regexp.test(product.product_name));
+        },
     },
     created() {
         this.$parent.getJson(`${API}${this.catalogUrl}`).then(data => {
             for (element of data) {
                 this.products.push(element);
-                this.$root.$refs.serch.filtered.push(element);
+                this.filtered.push(element);
             }
         })
     },
     template: `<div class="products">
-                    <product v-for="product of this.$root.$refs.serch.filtered" :key="product.id_product" :product='product' :imgCatalog='imgCatalog'></product>
+                    <product v-for="product of filtered" :key="product.id_product" :product='product' :imgCatalog='imgCatalog'></product>
                 </div>`
 });
 
