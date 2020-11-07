@@ -92,6 +92,29 @@ app.put('/api/cart/:id', (req, res) => { // /api/cart/56264
   });
 });
 
+//Удаление товара из корзины
+app.delete(`/api/cart/:id`, (req, res) => {
+  fs.readFile('./server/db/userCart.json', 'utf-8', (error, data) => {
+    if (error) {
+      res.sendStatus(404, JSON.stringify({
+        result: 0,
+        text: err
+      }));
+    } else {
+      const cart = JSON.parse(data); //парсим корзину
+      const item = cart.contents.find(el => el.id_product === +req.params.id);
+      cart.contents.splice(cart.contents.indexOf(item), 1); //удаляем элемент из массива
+      fs.writeFile('./server/db/userCart.json', JSON.stringify(cart), (err) => {
+        if (err) {
+          res.send('{"result": 0}');
+        } else {
+          res.send('{"result": 1}');
+        }
+      })
+    }
+  })
+})
+
 /**
  * Запуск сервера
  * @type {string|number}
